@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ post.title }}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="icon" href="{% static 'Icon.png' %}" type="image/png">
+</head>
+
+<body class="post-detail-page">  <!-- ✅ body at the correct place -->
+
+  <!-- Navigation -->
+  <nav class="nav">
+     <div class="logo-container">
+    <a href="{% url 'home' %}">
+      <img src="{% static 'Logo.png' %}" alt="Logo" class="nav-logo">
+    </a>
+  </div>
+    <div class="container">       
+      <a href="{% url 'home' %}">Home</a>
+      <a href="{% url 'about' %}">About</a>
+      <a href="{% url 'contact' %}">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <main class="container">
+    <article class="post-detail-card">
+      {% if post.image %}
+        <img class="post-detail-img" src="{{ post.image.url }}" alt="{{ post.title }}">
+      {% endif %}
+
+      <div class="post-detail-content">
+        <h1 class="post-detail-title">{{ post.title }}</h1>
+        <p class="meta">Posted on {{ post.date|date:"M d, Y" }} by {{ post.author }}</p>
+        <div class="post-body">
+          {{ post.excerpt|linebreaks }}   <!-- use full content here instead of excerpt -->
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© {{ now|date:"Y" }} {{ site_name|default:"My Awesome Blog" }}. All rights reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>

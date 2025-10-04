@@ -1,0 +1,158 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ category }}| Info Rush</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="icon" href="{% static 'Icon.png' %}" type="image/png">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Hero / Top Gradient */
+    .hero {
+      background: linear-gradient(to right, #4a90e2, #50e3c2);
+      color: white;
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .breadcrumb {
+      margin-bottom: 1.5rem;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+      color: #4a90e2;
+      font-weight: 500;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .posts-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .post-card {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+      transition: transform 0.2s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .post-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .post-card img {
+      width: 100%;
+      border-radius: 20px;
+      margin-bottom: 1rem;
+      object-fit: cover;
+      max-height: 100%;
+    }
+
+    .post-card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #16599b;
+    }
+
+    .post-card .meta {
+      font-size: 0.9rem;
+      color: #777;
+      margin-bottom: 1rem;
+    }
+
+    .post-card p {
+      flex-grow: 1;
+    }
+
+    .post-card .read-more {
+      text-decoration: none;
+      color: #16599b;
+      font-weight: 600;
+      margin-top: 1rem;
+      display: inline-block;
+    }
+
+    .post-card .read-more:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .hero h1 {
+        font-size: 2rem;
+      }
+      .hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero / Top Gradient -->
+  <div class="hero">
+    <h1>{{ category }}</h1>
+    <p>Browse all the latest articles in {{ category }}</p>
+  </div>
+
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="{% url 'home' %}">Home</a> / {{ category }}
+    </div>
+
+    <div class="posts-container">
+      {% if posts %}
+        {% for post in posts %}
+          <div class="post-card">
+            {% if post.image %}
+              <img src="{{ post.image.url }}" alt="{{ post.title }}">
+            {% endif %}
+            <h2>{{ post.title }}</h2>
+            <div class="meta">
+              By {{ post.author.username }} | {{ post.date|date:"F j, Y" }}
+            </div>
+            <p>{{ post.excerpt }}</p>
+            <a class="read-more" href="{% url 'post_detail' post.id %}">Read More →</a>
+          </div>
+        {% endfor %}
+      {% else %}
+        <p>No posts in this category yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>
