@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-@fqdd-6(jj9-!d&5tah6)rrjg$9olbcrm%9a4b$q-z!@hf=0d7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['info-rush.onrender.com']
+ALLOWED_HOSTS = ['info-rush.onrender.com', 'www.info-rush.onrender.com',
+]
 
 
 # Application definition
@@ -129,5 +130,11 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSRF_TRUSTED_ORIGINS = ['https://info-rush.onrender.com']
+CSRF_TRUSTED_ORIGINS = [
+    'https://info-rush.onrender.com',
+    'https://www.info-rush.onrender.com',
+]
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
 
