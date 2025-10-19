@@ -25,10 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@fqdd-6(jj9-!d&5tah6)rrjg$9olbcrm%9a4b$q-z!@hf=0d7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['info-rush.onrender.com', 'www.info-rush.onrender.com',
-]
+ALLOWED_HOSTS = ['54.175.132.142']
 
 
 # Application definition
@@ -127,14 +126,10 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-CSRF_TRUSTED_ORIGINS = [
-    'https://info-rush.onrender.com',
-    'https://www.info-rush.onrender.com',
-]
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 
