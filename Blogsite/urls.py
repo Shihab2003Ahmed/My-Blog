@@ -28,7 +28,7 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Posts.urls')),  # include blog app
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django-sitemap'),  # add sitemap
+   path("sitemap.xml", sitemap, {'sitemaps': sitemaps}, name='django-sitemap'),  # 👈 FIXED LINE
 ]
 
 if settings.DEBUG:
