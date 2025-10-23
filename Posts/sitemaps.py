@@ -1,14 +1,16 @@
 from django.contrib.sitemaps import Sitemap
+from django.urls import reverse
 from .models import Post
 
 class PostSitemap(Sitemap):
     changefreq = "daily"
-    priority = 0.8
+    priority = 0.9
 
     def items(self):
-        # Include all posts
         return Post.objects.all()
 
     def lastmod(self, obj):
-        # Use the creation date as last modified
-        return obj.date
+        return obj.date  # since you use date = models.DateTimeField(auto_now_add=True)
+
+    def location(self, obj):
+        return reverse('post_detail', args=[obj.id])
